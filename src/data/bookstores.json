@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Magers & Quinn Booksellers",
+    "lat": 44.9471,
+    "lng": -93.2985,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "22:00" }],
+      "tue": [{ "open": "10:00", "close": "22:00" }],
+      "wed": [{ "open": "10:00", "close": "22:00" }],
+      "thu": [{ "open": "10:00", "close": "22:00" }],
+      "fri": [{ "open": "10:00", "close": "22:00" }],
+      "sat": [{ "open": "10:00", "close": "22:00" }],
+      "sun": [{ "open": "10:00", "close": "22:00" }]
+    }
+  },
+  {
+    "name": "Moon Palace Books",
+    "lat": 44.9473,
+    "lng": -93.2473,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "18:30" }],
+      "tue": [{ "open": "11:00", "close": "18:30" }],
+      "wed": [{ "open": "11:00", "close": "18:30" }],
+      "thu": [{ "open": "11:00", "close": "18:30" }],
+      "fri": [{ "open": "11:00", "close": "18:30" }],
+      "sat": [{ "open": "11:00", "close": "18:30" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+  {
+    "name": "Wild Rumpus Books",
+    "lat": 44.9207,
+    "lng": -93.3176,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "19:00" }],
+      "wed": [{ "open": "10:00", "close": "19:00" }],
+      "thu": [{ "open": "10:00", "close": "19:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+  {
+    "name": "Red Balloon Bookshop",
+    "lat": 44.9397,
+    "lng": -93.1673,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "17:00" }],
+      "tue": [{ "open": "10:00", "close": "17:00" }],
+      "wed": [{ "open": "10:00", "close": "17:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "17:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "11:00", "close": "16:00" }]
+    }
+  },
+  {
+    "name": "SubText Books",
+    "lat": 44.9444,
+    "lng": -93.0946,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "17:00" }],
+      "tue": [{ "open": "10:00", "close": "17:00" }],
+      "wed": [{ "open": "10:00", "close": "17:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "17:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+  {
+    "name": "Black Garnet Books",
+    "lat": 44.9684,
+    "lng": -93.2886,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "18:00" }],
+      "wed": [{ "open": "11:00", "close": "18:00" }],
+      "thu": [{ "open": "11:00", "close": "18:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "11:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "16:00" }]
+    }
+  },
+  {
+    "name": "Paperback Exchange",
+    "lat": 44.9635,
+    "lng": -93.268,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "16:00" }]
+    }
+  },
+  {
+    "name": "Valley Bookseller",
+    "lat": 44.783,
+    "lng": -93.6019,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "17:00" }],
+      "tue": [{ "open": "10:00", "close": "17:00" }],
+      "wed": [{ "open": "10:00", "close": "17:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "17:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": []
+    }
+  },
+  {
+    "name": "Once Upon a Crime",
+    "lat": 44.9121,
+    "lng": -93.3278,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "18:00" }],
+      "wed": [{ "open": "11:00", "close": "18:00" }],
+      "thu": [{ "open": "11:00", "close": "18:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "11:00", "close": "17:00" }],
+      "sun": []
+    }
+  },
+  {
+    "name": "Eat My Words Bookstore",
+    "lat": 44.9625,
+    "lng": -93.2881,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "16:00" }],
+      "wed": [{ "open": "10:00", "close": "16:00" }],
+      "thu": [{ "open": "10:00", "close": "16:00" }],
+      "fri": [{ "open": "10:00", "close": "16:00" }],
+      "sat": [{ "open": "10:00", "close": "14:00" }],
+      "sun": []
+    }
+  }
+]
