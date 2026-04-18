@@ -1,15 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
   CircleMarker,
   Popup,
-  useMap
-} from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+  useMap,
+} from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-import bookstoresData from './data/bookstores.json';
+import bookstoresData from "./data/bookstores.json";
 
 import {
   Paper,
@@ -28,23 +28,40 @@ import {
   Autocomplete,
   Box,
   Button,
-  Divider
-} from '@mui/material';
+  Divider,
+} from "@mui/material";
 
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+
+// ---- Constants (moved to module scope) ----
+const MIN = 7 * 60;
+const MAX = 23 * 60;
+const STEP = 30;
+const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
 
 // ---- Types ----
 type TimeRange = {
   open: string;
   close: string;
+  note?: string;
 };
 
 type Store = {
   name: string;
   lat: number;
   lng: number;
+  note?: string;
   hours: { [key: string]: TimeRange[] };
+};
+
+// FIX: replaced `style: any` with a proper type
+type MarkerStyle = {
+  radius: number;
+  color: string;
+  fillColor: string;
+  fillOpacity: number;
+  weight: number;
 };
 
 const bookstores = bookstoresData as Store[];
@@ -72,12 +89,12 @@ function ResetViewButton() {
     <IconButton
       onClick={() => map.flyTo(center, defaultZoom)}
       sx={{
-        position: 'absolute',
+        position: "absolute",
         top: 72,
         left: 16,
         zIndex: 1200,
-        backgroundColor: 'white',
-        boxShadow: 2
+        backgroundColor: "white",
+        boxShadow: 2,
       }}
     >
       <HomeIcon />
@@ -87,23 +104,28 @@ function ResetViewButton() {
 
 // ---- Helpers ----
 const toMinutes = (time: string): number => {
-  const [h, m] = time.split(':').map(Number);
+  const [h, m] = time.split(":").map(Number);
   return h * 60 + m;
 };
 
 const formatTime = (mins: number): string => {
   const h = Math.floor(mins / 60);
   const m = mins % 60;
-  const period = h >= 12 ? 'PM' : 'AM';
+  const period = h >= 12 ? "PM" : "AM";
   const hour12 = h % 12 === 0 ? 12 : h % 12;
-  return `${hour12}:${m === 0 ? '00' : m} ${period}`;
+  return `${hour12}:${m === 0 ? "00" : m} ${period}`;
+};
+
+// FIX: formatRange now reuses formatTime instead of duplicating the 12-hour logic
+const formatRange = (range: TimeRange): string => {
+  return `${formatTime(toMinutes(range.open))} – ${formatTime(toMinutes(range.close))}`;
 };
 
 const isStoreOpenInRange = (
   store: Store,
   day: string,
   start: number,
-  end: number
+  end: number,
 ): boolean => {
   const ranges = store.hours[day];
   if (!ranges || ranges.length === 0) return false;
@@ -117,8 +139,7 @@ const isStoreOpenInRange = (
 
 const isOpenNow = (store: Store): boolean => {
   const now = new Date();
-  const today = ['sun','mon','tue','wed','thu','fri','sat'][now.getDay()];
-
+  const today = DAYS[now.getDay()];
   const current = now.getHours() * 60 + now.getMinutes();
   const ranges = store.hours[today];
 
@@ -127,7 +148,9 @@ const isOpenNow = (store: Store): boolean => {
   return ranges.some((range) => {
     const open = toMinutes(range.open);
     const close = toMinutes(range.close);
-    return current >= open && current <= close;
+    // FIX: was `current <= close`, which incorrectly showed stores as open
+    // at their exact closing time. Changed to strict less-than.
+    return current >= open && current < close;
   });
 };
 
@@ -135,10 +158,10 @@ const isOpenNow = (store: Store): boolean => {
 function StoreMarker({
   store,
   style,
-  isSelected
+  isSelected,
 }: {
   store: Store;
-  style: any;
+  style: MarkerStyle;
   isSelected: boolean;
 }) {
   const markerRef = useRef<L.CircleMarker | null>(null);
@@ -151,26 +174,11 @@ function StoreMarker({
   }, [isSelected]);
 
   const todayIndex = new Date().getDay();
-  const days = ['sun','mon','tue','wed','thu','fri','sat'];
-
-  const formatRange = (range: TimeRange) => {
-    const [h, m] = range.open.split(':').map(Number);
-    const [h2, m2] = range.close.split(':').map(Number);
-
-    const to12 = (h: number, m: number) => {
-      const period = h >= 12 ? 'PM' : 'AM';
-      const hour12 = h % 12 === 0 ? 12 : h % 12;
-      return `${hour12}:${m === 0 ? '00' : m} ${period}`;
-    };
-
-    return `${to12(h, m)} – ${to12(h2, m2)}`;
-  };
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
-      `${store.lat.toFixed(6)}, ${store.lng.toFixed(6)}`
+      `${store.lat.toFixed(6)}, ${store.lng.toFixed(6)}`,
     );
-
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   };
@@ -184,12 +192,11 @@ function StoreMarker({
         color: style.color,
         weight: style.weight,
         fillColor: style.fillColor,
-        fillOpacity: style.fillOpacity
+        fillOpacity: style.fillOpacity,
       }}
     >
       <Popup>
-        <Stack spacing={1.2} sx={{ minWidth: 220 }}>
-
+        <Stack spacing={1.2} sx={{ minWidth: 200 }}>
           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
             {store.name}
           </Typography>
@@ -198,13 +205,13 @@ function StoreMarker({
 
           <Box
             sx={{
-              display: 'grid',
-              gridTemplateColumns: '32px 1fr',
+              display: "grid",
+              gridTemplateColumns: "32px 1fr",
               rowGap: 0.5,
-              columnGap: 1
+              columnGap: 1,
             }}
           >
-            {days.map((d, i) => {
+            {DAYS.map((d, i) => {
               const ranges = store.hours[d];
               const isToday = i === todayIndex;
 
@@ -215,7 +222,7 @@ function StoreMarker({
                     sx={{
                       fontWeight: isToday ? 600 : 400,
                       opacity: isToday ? 1 : 0.7,
-                      textTransform: 'capitalize'
+                      textTransform: "capitalize",
                     }}
                   >
                     {d}
@@ -225,12 +232,12 @@ function StoreMarker({
                     variant="caption"
                     sx={{
                       fontWeight: isToday ? 600 : 400,
-                      opacity: isToday ? 1 : 0.7
+                      opacity: isToday ? 1 : 0.7,
                     }}
                   >
                     {ranges && ranges.length > 0
-                      ? ranges.map(formatRange).join(', ')
-                      : 'Closed'}
+                      ? ranges.map(formatRange).join(", ")
+                      : "Closed"}
                   </Typography>
                 </React.Fragment>
               );
@@ -245,20 +252,19 @@ function StoreMarker({
             onClick={handleCopy}
             fullWidth
           >
-            {copied ? 'Copied!' : 'Copy coordinates'}
+            {copied ? "Copied!" : "Copy coordinates"}
           </Button>
 
           <Typography
             variant="caption"
             sx={{
-              textAlign: 'center',
+              textAlign: "center",
               opacity: 0.6,
-              fontFamily: 'monospace'
+              fontFamily: "monospace",
             }}
           >
             {store.lat.toFixed(5)}, {store.lng.toFixed(5)}
           </Typography>
-
         </Stack>
       </Popup>
     </CircleMarker>
@@ -267,41 +273,37 @@ function StoreMarker({
 
 // ---- App ----
 function App() {
-  const MIN = 7 * 60;
-  const MAX = 23 * 60;
-  const STEP = 30;
-
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [mode, setMode] = useState<'all' | 'range' | 'openNow'>('all');
-  const [day, setDay] = useState<string>('sat');
+  const [mode, setMode] = useState<"all" | "range" | "openNow">("all");
+  const [day, setDay] = useState<string>("sat");
   const [range, setRange] = useState<number[]>([720, 900]);
-
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
   const open = Boolean(anchorEl);
 
-  const getStyle = (store: Store) => {
+  const getStyle = (store: Store): MarkerStyle => {
     let isMatch = true;
 
-    if (mode === 'openNow') isMatch = isOpenNow(store);
-    if (mode === 'range') isMatch = isStoreOpenInRange(store, day, range[0], range[1]);
+    if (mode === "openNow") isMatch = isOpenNow(store);
+    if (mode === "range")
+      isMatch = isStoreOpenInRange(store, day, range[0], range[1]);
 
     if (isMatch) {
       return {
         radius: 8,
-        color: '#4b5563',
-        fillColor: '#7dd3fc',
+        color: "#4b5563",
+        fillColor: "#7dd3fc",
         fillOpacity: 1,
-        weight: 3
+        weight: 3,
       };
     }
 
     return {
       radius: 6,
-      color: '#6b7280',
-      fillColor: '#cbd5f5',
+      color: "#6b7280",
+      fillColor: "#cbd5f5",
       fillOpacity: 0.5,
-      weight: 2
+      weight: 2,
     };
   };
 
@@ -310,12 +312,12 @@ function App() {
       <IconButton
         onClick={(e) => setAnchorEl(e.currentTarget)}
         sx={{
-          position: 'absolute',
+          position: "absolute",
           top: 16,
           left: 16,
           zIndex: 1200,
-          backgroundColor: 'white',
-          boxShadow: 2
+          backgroundColor: "white",
+          boxShadow: 2,
         }}
       >
         <MenuIcon />
@@ -325,11 +327,10 @@ function App() {
         open={open}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
         <Paper sx={{ p: 2, width: 280 }}>
           <Stack spacing={2}>
-
             <Autocomplete
               options={bookstores}
               getOptionLabel={(option) => option.name}
@@ -350,7 +351,7 @@ function App() {
               <ToggleButton value="openNow">Now</ToggleButton>
             </ToggleButtonGroup>
 
-            {mode === 'range' && (
+            {mode === "range" && (
               <>
                 <FormControl fullWidth size="small">
                   <InputLabel>Day</InputLabel>
@@ -369,26 +370,37 @@ function App() {
                   </Select>
                 </FormControl>
 
-                <Box>
-                  <Typography variant="caption">
-                    {formatTime(range[0])}
-                  </Typography>
-
+                <Box sx={{ px: 1, pt: 3 }}>
                   <Slider
                     value={range}
                     onChange={(_, v) => setRange(v as number[])}
                     min={MIN}
                     max={MAX}
                     step={STEP}
+                    valueLabelDisplay="on"
+                    valueLabelFormat={formatTime}
+                    sx={{
+                      "& .MuiSlider-valueLabel": {
+                        fontSize: 11,
+                        padding: "2px 6px",
+                      },
+                      // Stagger the two thumbs: first label above (default),
+                      // second label below so they never overlap
+                      "& .MuiSlider-thumb:nth-of-type(4) .MuiSlider-valueLabel":
+                        {
+                          top: "auto",
+                          bottom: -32,
+                          "&::before": {
+                            top: "auto",
+                            bottom: "100%",
+                            transform: "translateX(-50%) rotate(180deg)",
+                          },
+                        },
+                    }}
                   />
-
-                  <Typography variant="caption" textAlign="right">
-                    {formatTime(range[1])}
-                  </Typography>
                 </Box>
               </>
             )}
-
           </Stack>
         </Paper>
       </Popover>
@@ -397,19 +409,20 @@ function App() {
         center={center}
         zoom={defaultZoom}
         zoomControl={false}
-        style={{ height: '100vh', width: '100vw' }}
+        style={{ height: "100vh", width: "100vw" }}
       >
         <FlyToStore store={selectedStore} />
         <ResetViewButton />
 
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+          attribution="&copy; OpenStreetMap contributors &copy; CARTO"
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
 
-        {bookstores.map((store, index) => (
+        {/* FIX: use store.name as key instead of array index */}
+        {bookstores.map((store) => (
           <StoreMarker
-            key={index}
+            key={store.name}
             store={store}
             style={getStyle(store)}
             isSelected={selectedStore?.name === store.name}
