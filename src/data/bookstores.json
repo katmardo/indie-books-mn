@@ -1,124 +1,653 @@
 [
-  { "name": "Acorn Bookshop", "lat": 44.9415, "lng": -93.2897, "note": "made_up_data",
-    "hours": { "mon":[{"open":"10:00","close":"18:00"}],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Against the Current", "lat": 44.9680, "lng": -93.2470,
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"18:00"}],"wed":[{"open":"12:00","close":"18:00"}],"thu":[{"open":"12:00","close":"18:00"}],"fri":[{"open":"12:00","close":"18:00"}],"sat":[{"open":"12:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Avant Garden Bookstore", "lat": 44.9390, "lng": -93.2810, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"18:00"}],"wed":[{"open":"12:00","close":"18:00"}],"thu":[{"open":"12:00","close":"18:00"}],"fri":[{"open":"12:00","close":"18:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Babycake’s Book Stack", "lat": 44.9400, "lng": -93.2500, "note": "made_up_data",
-    "hours": { "mon":[{"open":"09:00","close":"15:00"}],"tue":[{"open":"09:00","close":"15:00"}],"wed":[{"open":"09:00","close":"15:00"}],"thu":[{"open":"09:00","close":"15:00"}],"fri":[{"open":"09:00","close":"15:00"}],"sat":[{"open":"10:00","close":"14:00"}],"sun":[] }},
-
-  { "name": "Big Hill Books", "lat": 44.9300, "lng": -93.2800, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Birchbark Books", "lat": 44.9203, "lng": -93.3175,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"11:00","close":"15:00"}] }},
-
-  { "name": "Black Garnet Books", "lat": 44.9778, "lng": -93.2650,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"18:00"}],"wed":[{"open":"11:00","close":"18:00"}],"thu":[{"open":"11:00","close":"18:00"}],"fri":[{"open":"11:00","close":"18:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Black Letter Books", "lat": 44.9800, "lng": -93.3000, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"18:00"}],"wed":[{"open":"12:00","close":"18:00"}],"thu":[{"open":"12:00","close":"18:00"}],"fri":[{"open":"12:00","close":"18:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Boneshaker Books", "lat": 44.9775, "lng": -93.2526,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"19:00"}],"wed":[{"open":"11:00","close":"19:00"}],"thu":[{"open":"11:00","close":"19:00"}],"fri":[{"open":"11:00","close":"19:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "The Book House in Dinkytown", "lat": 44.9800, "lng": -93.2400, "note": "made_up_data",
-    "hours": { "mon":[{"open":"10:00","close":"18:00"}],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Chapter2 Books", "lat": 45.0560, "lng": -92.8060,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"17:00"}],"wed":[{"open":"11:00","close":"17:00"}],"thu":[{"open":"11:00","close":"17:00"}],"fri":[{"open":"11:00","close":"17:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"11:00","close":"15:00"}] }},
-
-  { "name": "Comma, a bookshop", "lat": 44.9600, "lng": -93.2300, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Cream & Amber", "lat": 44.9480, "lng": -93.2470,
-    "hours": { "mon":[{"open":"08:00","close":"16:00"}],"tue":[{"open":"08:00","close":"16:00"}],"wed":[{"open":"08:00","close":"16:00"}],"thu":[{"open":"08:00","close":"16:00"}],"fri":[{"open":"08:00","close":"16:00"}],"sat":[{"open":"09:00","close":"15:00"}],"sun":[] }},
-
-  { "name": "DreamHaven Books", "lat": 44.9399, "lng": -93.2917,
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"20:00"}],"wed":[{"open":"12:00","close":"20:00"}],"thu":[{"open":"12:00","close":"20:00"}],"fri":[{"open":"12:00","close":"20:00"}],"sat":[{"open":"11:00","close":"18:00"}],"sun":[{"open":"12:00","close":"17:00"}] }},
-
-  { "name": "Eat My Words Bookstore", "lat": 44.9400, "lng": -93.2200, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"17:00"}],"wed":[{"open":"11:00","close":"17:00"}],"thu":[{"open":"11:00","close":"17:00"}],"fri":[{"open":"11:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
-
-  { "name": "Excelsior Bay Books", "lat": 44.9020, "lng": -93.5660,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"11:00","close":"15:00"}] }},
-
-  { "name": "Inkwell Booksellers Company", "lat": 44.8800, "lng": -93.4500, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Lake Country Booksellers", "lat": 44.9300, "lng": -93.6500,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
-
-  { "name": "Magers & Quinn Booksellers", "lat": 44.9471, "lng": -93.2985,
-    "hours": { "mon":[{"open":"10:00","close":"21:00"}],"tue":[{"open":"10:00","close":"21:00"}],"wed":[{"open":"10:00","close":"21:00"}],"thu":[{"open":"10:00","close":"21:00"}],"fri":[{"open":"10:00","close":"21:00"}],"sat":[{"open":"10:00","close":"21:00"}],"sun":[{"open":"10:00","close":"18:00"}] }},
-
-  { "name": "Mayday Books", "lat": 44.9600, "lng": -93.2800,
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"18:00"}],"wed":[{"open":"12:00","close":"18:00"}],"thu":[{"open":"12:00","close":"18:00"}],"fri":[{"open":"12:00","close":"18:00"}],"sat":[{"open":"12:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Midway Book Store", "lat": 44.9700, "lng": -93.1700,
-    "hours": { "mon":[{"open":"10:00","close":"18:00"}],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Milkweed Books", "lat": 44.9485, "lng": -93.2490,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"18:00"}],"wed":[{"open":"11:00","close":"18:00"}],"thu":[{"open":"11:00","close":"18:00"}],"fri":[{"open":"11:00","close":"18:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Moon Palace Books", "lat": 44.9473, "lng": -93.2473,
-    "hours": { "mon":[{"open":"11:00","close":"19:00"}],"tue":[{"open":"11:00","close":"19:00"}],"wed":[{"open":"11:00","close":"19:00"}],"thu":[{"open":"11:00","close":"19:00"}],"fri":[{"open":"11:00","close":"20:00"}],"sat":[{"open":"10:00","close":"20:00"}],"sun":[{"open":"10:00","close":"18:00"}] }},
-
-  { "name": "Next Chapter Booksellers", "lat": 44.8800, "lng": -93.2800,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
-
-  { "name": "Niche Books", "lat": 44.9200, "lng": -93.3000,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
-
-  { "name": "Once Upon A Crime", "lat": 44.9401, "lng": -93.3203,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"18:00"}],"wed":[{"open":"11:00","close":"18:00"}],"thu":[{"open":"11:00","close":"18:00"}],"fri":[{"open":"11:00","close":"18:00"}],"sat":[{"open":"11:00","close":"17:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
-
-  { "name": "Paperback Exchange", "lat": 44.9400, "lng": -93.3000, "note": "made_up_data",
-    "hours": { "mon":[{"open":"10:00","close":"18:00"}],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[] }},
-
-  { "name": "Red Balloon Bookshop", "lat": 44.9397, "lng": -93.1673,
+  {
+    "name": "Acorn Bookshop",
+    "lat": 44.98118569469903,
+    "lng": -93.19515008204212,
     "hours": {
-      "mon":[{"open":"10:00","close":"17:00"}],
-      "tue":[{"open":"10:00","close":"17:00"}],
-      "wed":[{"open":"08:00","close":"20:00","note":"independent_bookstore_week_extended"}],
-      "thu":[{"open":"08:00","close":"20:00","note":"independent_bookstore_week_extended"}],
-      "fri":[{"open":"10:00","close":"17:00"}],
-      "sat":[{"open":"10:00","close":"17:00"}],
-      "sun":[{"open":"11:00","close":"16:00"}]
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "19:00" }],
+      "wed": [{ "open": "10:00", "close": "19:00" }],
+      "thu": [{ "open": "10:00", "close": "19:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "19:00" }],
+      "sun": [{ "open": "10:00", "close": "17:00" }]
     }
   },
 
-  { "name": "Story Line Books", "lat": 44.9100, "lng": -93.3300, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
+  {
+    "name": "Against the Current",
+    "lat": 44.93996749636795,
+    "lng": -93.17042311945474,
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [{ "open": "10:00", "close": "20:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "20:00" }],
+      "sat": [{ "open": "10:00", "close": "20:00" }],
+      "sun": [{ "open": "10:00", "close": "18:00" }]
+    }
+  },
 
-  { "name": "Strive Bookstore", "lat": 44.9600, "lng": -93.2000, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"17:00"}],"wed":[{"open":"11:00","close":"17:00"}],"thu":[{"open":"11:00","close":"17:00"}],"fri":[{"open":"11:00","close":"17:00"}],"sat":[{"open":"11:00","close":"16:00"}],"sun":[] }},
+  {
+    "name": "Avant Garden Bookstore",
+    "lat": 45.198091045391344,
+    "lng": -93.38867004472957,
+    "hours": {
+      "mon": [{ "open": "7:00", "close": "17:00" }],
+      "tue": [{ "open": "7:00", "close": "17:00" }],
+      "wed": [{ "open": "7:00", "close": "17:00" }],
+      "thu": [{ "open": "7:00", "close": "17:00" }],
+      "fri": [{ "open": "7:00", "close": "17:00" }],
+      "sat": [{ "open": "8:00", "close": "17:00" }],
+      "sun": [{ "open": "9:00", "close": "17:00" }]
+    }
+  },
 
-  { "name": "SubText Books", "lat": 44.9396, "lng": -93.0900,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"18:00"}],"sun":[{"open":"11:00","close":"17:00"}] }},
+  {
+    "name": "Babycake’s Book Stack",
+    "lat": 44.94747509303155,
+    "lng": -93.23398976504994,
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [],
+      "thu": [],
+      "fri": [],
+      "sat": [{ "open": "10:00", "close": "16:00" }],
+      "sun": []
+    }
+  },
 
-  { "name": "The Thinking Spot", "lat": 44.8900, "lng": -93.3500, "note": "made_up_data",
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
+  {
+    "name": "Big Hill Books",
+    "lat": 44.97338983530861,
+    "lng": -93.30813938794866,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "17:00" }],
+      "wed": [{ "open": "10:00", "close": "17:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "21:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "11:00", "close": "16:00" }]
+    }
+  },
 
-  { "name": "Tropes & Trifles", "lat": 45.0560, "lng": -92.8065,
-    "hours": { "mon":[],"tue":[{"open":"12:00","close":"20:00"}],"wed":[{"open":"12:00","close":"20:00"}],"thu":[{"open":"12:00","close":"20:00"}],"fri":[{"open":"12:00","close":"20:00"}],"sat":[{"open":"11:00","close":"18:00"}],"sun":[{"open":"12:00","close":"17:00"}] }},
+  {
+    "name": "Birchbark Books",
+    "lat": 44.96167000769457,
+    "lng": -93.30801262816311,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "11:00", "close": "18:00" }]
+    }
+  },
 
-  { "name": "Uncle Hugo’s & Uncle Edgar’s Bookstores", "lat": 44.9779, "lng": -93.2653,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"18:00"}],"wed":[{"open":"11:00","close":"18:00"}],"thu":[{"open":"11:00","close":"18:00"}],"fri":[{"open":"11:00","close":"18:00"}],"sat":[{"open":"11:00","close":"18:00"}],"sun":[{"open":"12:00","close":"16:00"}] }},
+  {
+    "name": "Black Garnet Books",
+    "lat": 44.95592236400556,
+    "lng": -93.15595564496304,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "18:00" }],
+      "wed": [{ "open": "11:00", "close": "18:00" }],
+      "thu": [{ "open": "11:00", "close": "18:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "11:00", "close": "18:00" }],
+      "sun": [{ "open": "11:00", "close": "18:00" }]
+    }
+  },
 
-  { "name": "University of Minnesota Bookstores", "lat": 44.9737, "lng": -93.2353,
-    "hours": { "mon":[{"open":"09:00","close":"17:00"}],"tue":[{"open":"09:00","close":"17:00"}],"wed":[{"open":"09:00","close":"17:00"}],"thu":[{"open":"09:00","close":"17:00"}],"fri":[{"open":"09:00","close":"17:00"}],"sat":[],"sun":[] }},
+  {
+    "name": "Black Letter Books",
+    "lat": 45.056407025568696,
+    "lng": -92.80633139971344,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "17:00" }],
+      "tue": [{ "open": "11:00", "close": "17:00" }],
+      "wed": [{ "open": "11:00", "close": "17:00" }],
+      "thu": [{ "open": "11:00", "close": "17:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "18:00" }]
+    }
+  },
 
-  { "name": "Valley Bookseller", "lat": 45.0565, "lng": -92.8062,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"17:00"}],"wed":[{"open":"10:00","close":"17:00"}],"thu":[{"open":"10:00","close":"17:00"}],"fri":[{"open":"10:00","close":"17:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"11:00","close":"15:00"}] }},
+  {
+    "name": "Boneshaker Books",
+    "lat": 44.95570067198021,
+    "lng": -93.28863903830704,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "20:00" }],
+      "tue": [{ "open": "14:00", "close": "20:00" }],
+      "wed": [{ "open": "11:00", "close": "20:00" }],
+      "thu": [{ "open": "11:00", "close": "20:00" }],
+      "fri": [{ "open": "11:00", "close": "20:00" }],
+      "sat": [{ "open": "11:00", "close": "20:00" }],
+      "sun": [{ "open": "11:00", "close": "17:00" }]
+    }
+  },
 
-  { "name": "The Vintage Storyteller", "lat": 45.0840, "lng": -93.0130,
-    "hours": { "mon":[],"tue":[{"open":"11:00","close":"17:00"}],"wed":[{"open":"11:00","close":"17:00"}],"thu":[{"open":"11:00","close":"17:00"}],"fri":[{"open":"11:00","close":"17:00"}],"sat":[{"open":"10:00","close":"16:00"}],"sun":[] }},
+  {
+    "name": "The Book House in Dinkytown",
+    "lat": 44.98059913350139,
+    "lng": -93.23646499441054,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "20:00" }],
+      "tue": [{ "open": "10:00", "close": "20:00" }],
+      "wed": [{ "open": "10:00", "close": "20:00" }],
+      "thu": [{ "open": "10:00", "close": "20:00" }],
+      "fri": [{ "open": "10:00", "close": "20:00" }],
+      "sat": [{ "open": "11:00", "close": "20:00" }],
+      "sun": [{ "open": "11:00", "close": "18:00" }]
+    }
+  },
 
-  { "name": "Wild Rumpus Books", "lat": 44.9207, "lng": -93.3176,
-    "hours": { "mon":[],"tue":[{"open":"10:00","close":"18:00"}],"wed":[{"open":"10:00","close":"18:00"}],"thu":[{"open":"10:00","close":"18:00"}],"fri":[{"open":"10:00","close":"18:00"}],"sat":[{"open":"10:00","close":"17:00"}],"sun":[{"open":"11:00","close":"16:00"}] }}
+  {
+    "name": "Chapter2 Books",
+    "lat": 44.974523112776566,
+    "lng": -92.75676293001285,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [
+        {
+          "open": "09:00",
+          "close": "19:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sun": [{ "open": "11:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Comma, a bookshop",
+    "lat": 44.925190791542526,
+    "lng": -93.31483986387231,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "18:00" }],
+      "wed": [{ "open": "11:00", "close": "18:00" }],
+      "thu": [{ "open": "11:00", "close": "18:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [
+        {
+          "open": "09:00",
+          "close": "17:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sun": [{ "open": "11:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Cream & Amber",
+    "lat": 44.92452387680943,
+    "lng": -93.42068892728436,
+    "hours": {
+      "mon": [{ "open": "07:30", "close": "17:00" }],
+      "tue": [{ "open": "07:30", "close": "19:30" }],
+      "wed": [{ "open": "07:30", "close": "19:30" }],
+      "thu": [{ "open": "07:30", "close": "19:30" }],
+      "fri": [{ "open": "07:30", "close": "19:30" }],
+      "sat": [{ "open": "07:30", "close": "19:30" }],
+      "sun": [{ "open": "07:30", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "DreamHaven Books",
+    "lat": 44.93392211253316,
+    "lng": -93.23806752031463,
+    "hours": {
+      "mon": [{ "open": "12:00", "close": "18:00" }],
+      "tue": [{ "open": "12:00", "close": "18:00" }],
+      "wed": [{ "open": "12:00", "close": "18:00" }],
+      "thu": [{ "open": "12:00", "close": "18:00" }],
+      "fri": [{ "open": "12:00", "close": "18:00" }],
+      "sat": [{ "open": "12:00", "close": "18:00" }],
+      "sun": []
+    }
+  },
+
+  {
+    "name": "Eat My Words Bookstore",
+    "lat": 44.989353195333194,
+    "lng": -93.25070821112386,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "20:00" }],
+      "tue": [{ "open": "10:00", "close": "20:00" }],
+      "wed": [{ "open": "10:00", "close": "20:00" }],
+      "thu": [{ "open": "10:00", "close": "20:00" }],
+      "fri": [{ "open": "10:00", "close": "20:00" }],
+      "sat": [{ "open": "10:00", "close": "20:00" }],
+      "sun": [{ "open": "10:00", "close": "18:00" }]
+    }
+  },
+
+  {
+    "name": "Excelsior Bay Books",
+    "lat": 44.90382164416021,
+    "lng": -93.56602976958739,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "16:00" }]
+    }
+  },
+
+  {
+    "name": "Inkwell Booksellers Company",
+    "lat": 44.98854738150469,
+    "lng": -93.25392097046998,
+    "hours": {
+      "mon": [{ "open": "08:00", "close": "20:00" }],
+      "tue": [{ "open": "08:00", "close": "20:00" }],
+      "wed": [{ "open": "08:00", "close": "20:00" }],
+      "thu": [{ "open": "08:00", "close": "20:00" }],
+      "fri": [{ "open": "08:00", "close": "20:00" }],
+      "sat": [{ "open": "08:00", "close": "20:00" }],
+      "sun": [{ "open": "08:00", "close": "18:00" }]
+    }
+  },
+
+  {
+    "name": "Lake Country Booksellers",
+    "lat": 45.085280974072056,
+    "lng": -93.00885149038122,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "10:00", "close": "15:00" }]
+    }
+  },
+
+  {
+    "name": "Magers & Quinn Booksellers",
+    "lat": 44.94711360984794,
+    "lng": -93.29860089823359,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "22:00" }],
+      "tue": [{ "open": "10:00", "close": "22:00" }],
+      "wed": [{ "open": "10:00", "close": "22:00" }],
+      "thu": [{ "open": "10:00", "close": "22:00" }],
+      "fri": [{ "open": "10:00", "close": "22:00" }],
+      "sat": [{ "open": "10:00", "close": "22:00" }],
+      "sun": [{ "open": "10:00", "close": "22:00" }]
+    }
+  },
+
+  {
+    "name": "Mayday Books",
+    "lat": 44.970999657888996,
+    "lng": -93.24705710709723,
+    "hours": {
+      "mon": [{ "open": "13:00", "close": "17:00" }],
+      "tue": [{ "open": "13:00", "close": "17:00" }],
+      "wed": [{ "open": "13:00", "close": "17:00" }],
+      "thu": [{ "open": "13:00", "close": "17:00" }],
+      "fri": [{ "open": "13:00", "close": "17:00" }],
+      "sat": [{ "open": "13:00", "close": "17:00" }],
+      "sun": []
+    }
+  },
+
+  {
+    "name": "Midway Used & Rare Books",
+    "lat": 44.95586765231693,
+    "lng": -93.16680419294742,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "17:00" }],
+      "tue": [{ "open": "11:00", "close": "17:00" }],
+      "wed": [{ "open": "11:00", "close": "17:00" }],
+      "thu": [{ "open": "11:00", "close": "17:00" }],
+      "fri": [{ "open": "11:00", "close": "17:00" }],
+      "sat": [{ "open": "11:00", "close": "17:00" }],
+      "sun": [{ "open": "11:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Milkweed Books",
+    "lat": 44.97547345082795,
+    "lng": -93.25418155543116,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "19:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "11:00", "close": "15:00" }]
+    }
+  },
+
+  {
+    "name": "Moon Palace Books",
+    "lat": 44.947224036212035,
+    "lng": -93.23373428473386,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "18:30" }],
+      "tue": [{ "open": "11:00", "close": "18:30" }],
+      "wed": [{ "open": "11:00", "close": "18:30" }],
+      "thu": [{ "open": "11:00", "close": "18:30" }],
+      "fri": [{ "open": "11:00", "close": "18:30" }],
+      "sat": [{ "open": "11:00", "close": "18:30" }],
+      "sun": [{ "open": "10:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Next Chapter Booksellers",
+    "lat": 44.940415676008875,
+    "lng": -93.16679190963056,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "17:00" }],
+      "tue": [{ "open": "10:00", "close": "17:00" }],
+      "wed": [{ "open": "10:00", "close": "17:00" }],
+      "thu": [{ "open": "10:00", "close": "17:00" }],
+      "fri": [{ "open": "10:00", "close": "17:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Niche Books",
+    "lat": 44.64842051558861,
+    "lng": -93.24261267436951,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "19:00" }],
+      "sun": []
+    }
+  },
+
+  {
+    "name": "Once Upon A Crime",
+    "lat": 44.9556701050689,
+    "lng": -93.28726781017521,
+    "hours": {
+      "mon": [{ "open": "11:00", "close": "17:30" }],
+      "tue": [{ "open": "11:00", "close": "17:30" }],
+      "wed": [{ "open": "11:00", "close": "17:30" }],
+      "thu": [{ "open": "11:00", "close": "17:30" }],
+      "fri": [{ "open": "11:00", "close": "17:30" }],
+      "sat": [{ "open": "11:00", "close": "17:30" }],
+      "sun": [{ "open": "11:00", "close": "17:30" }]
+    }
+  },
+
+  {
+    "name": "Paperback Exchange",
+    "lat": 44.91172449842424,
+    "lng": -93.32888533561928,
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [],
+      "thu": [],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "11:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "16:00" }]
+    }
+  },
+
+  {
+    "name": "Red Balloon Bookshop",
+    "lat": 44.94017183461807,
+    "lng": -93.1377962516992,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "19:00" }],
+      "tue": [{ "open": "10:00", "close": "19:00" }],
+      "wed": [
+        {
+          "open": "10:00",
+          "close": "19:00"
+        }
+      ],
+      "thu": [
+        {
+          "open": "10:00",
+          "close": "19:00"
+        }
+      ],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "19:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Story Line Books",
+    "lat": 44.94742214727091,
+    "lng": -93.08589062684709,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "08:00", "close": "20:00" }],
+      "wed": [{ "open": "08:00", "close": "20:00" }],
+      "thu": [{ "open": "08:00", "close": "20:00" }],
+      "fri": [{ "open": "08:00", "close": "20:00" }],
+      "sat": [{ "open": "08:00", "close": "20:00" }],
+      "sun": [{ "open": "10:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "Strive Bookstore",
+    "lat": 44.97487313834696,
+    "lng": -93.27319048476548,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "20:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [],
+      "sun": []
+    }
+  },
+
+  {
+    "name": "SubText Books",
+    "lat": 44.94546950678012,
+    "lng": -93.0947233878915,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "19:00" }],
+      "tue": [{ "open": "10:00", "close": "19:00" }],
+      "wed": [{ "open": "10:00", "close": "19:00" }],
+      "thu": [{ "open": "10:00", "close": "19:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "19:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "The Thinking Spot",
+    "lat": 44.9426354057088,
+    "lng": -93.50168207513332,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [
+        {
+          "open": "10:00",
+          "close": "18:30",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "thu": [
+        {
+          "open": "10:00",
+          "close": "18:30",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "fri": [
+        {
+          "open": "10:00",
+          "close": "18:30",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sat": [
+        {
+          "open": "9:00",
+          "close": "19:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sun": [
+        {
+          "open": "10:00",
+          "close": "18:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ]
+    }
+  },
+
+  {
+    "name": "Tropes & Trifles",
+    "lat": 44.93403249395688,
+    "lng": -93.23264155167851,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "18:00" }],
+      "wed": [{ "open": "11:00", "close": "18:00" }],
+      "thu": [{ "open": "11:00", "close": "18:00" }],
+      "fri": [{ "open": "11:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "10:00", "close": "16:00" }]
+    }
+  },
+
+  {
+    "name": "Uncle Hugo’s & Uncle Edgar’s Bookstores",
+    "lat": 44.94696622651531,
+    "lng": -93.2325258774761,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  },
+
+  {
+    "name": "University of Minnesota Bookstores",
+    "lat": 44.97297589368053,
+    "lng": -93.23533600756092,
+    "hours": {
+      "mon": [{ "open": "08:30", "close": "17:00" }],
+      "tue": [{ "open": "08:30", "close": "17:00" }],
+      "wed": [{ "open": "08:30", "close": "17:00" }],
+      "thu": [{ "open": "08:30", "close": "17:00" }],
+      "fri": [{ "open": "08:30", "close": "17:00" }],
+      "sat": [{ "open": "10:00", "close": "16:00" }],
+      "sun": []
+    }
+  },
+
+  {
+    "name": "Valley Bookseller",
+    "lat": 45.05754925749618,
+    "lng": -92.80611986463826,
+    "hours": {
+      "mon": [{ "open": "10:00", "close": "18:00" }],
+      "tue": [{ "open": "10:00", "close": "18:00" }],
+      "wed": [{ "open": "10:00", "close": "18:00" }],
+      "thu": [{ "open": "10:00", "close": "18:00" }],
+      "fri": [{ "open": "10:00", "close": "18:00" }],
+      "sat": [{ "open": "10:00", "close": "18:00" }],
+      "sun": [{ "open": "10:00", "close": "18:00" }]
+    }
+  },
+
+  {
+    "name": "The Vintage Storyteller",
+    "lat": 45.008767455668234,
+    "lng": -93.6576101295213,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "11:00", "close": "16:00" }],
+      "wed": [
+        {
+          "open": "10:00",
+          "close": "18:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "thu": [
+        {
+          "open": "10:00",
+          "close": "18:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "fri": [
+        {
+          "open": "10:00",
+          "close": "18:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sat": [
+        {
+          "open": "10:00",
+          "close": "18:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ],
+      "sun": [
+        {
+          "open": "11:00",
+          "close": "17:00",
+          "note": "independent_bookstore_week_extended"
+        }
+      ]
+    }
+  },
+
+  {
+    "name": "Wild Rumpus Books",
+    "lat": 44.92466182791888,
+    "lng": -93.3136273055869,
+    "hours": {
+      "mon": [],
+      "tue": [{ "open": "10:00", "close": "19:00" }],
+      "wed": [{ "open": "10:00", "close": "19:00" }],
+      "thu": [{ "open": "10:00", "close": "19:00" }],
+      "fri": [{ "open": "10:00", "close": "19:00" }],
+      "sat": [{ "open": "10:00", "close": "17:00" }],
+      "sun": [{ "open": "12:00", "close": "17:00" }]
+    }
+  }
 ]

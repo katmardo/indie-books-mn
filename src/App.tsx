@@ -22,23 +22,35 @@ import {
   MenuItem,
   ToggleButton,
   ToggleButtonGroup,
-  Popover,
   IconButton,
   TextField,
   Autocomplete,
   Box,
   Button,
   Divider,
+  Tooltip,
 } from "@mui/material";
 
-import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+import CloseIcon from "@mui/icons-material/Close";
 
-// ---- Constants (moved to module scope) ----
+// ---- Constants ----
 const MIN = 7 * 60;
 const MAX = 23 * 60;
 const STEP = 30;
 const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
+
+const DAY_LABELS: { [key: string]: string } = {
+  sun: "Sunday",
+  mon: "Monday",
+  tue: "Tuesday",
+  wed: "Wednesday",
+  thu: "Thursday",
+  fri: "Friday",
+  sat: "Saturday",
+};
 
 // ---- Types ----
 type TimeRange = {
@@ -55,7 +67,6 @@ type Store = {
   hours: { [key: string]: TimeRange[] };
 };
 
-// FIX: replaced `style: any` with a proper type
 type MarkerStyle = {
   radius: number;
   color: string;
@@ -70,36 +81,37 @@ const center: [number, number] = [44.95, -93.27];
 const defaultZoom = 11;
 
 // ---- Map helpers ----
-function FlyToStore({ store }: { store: Store | null }) {
+function FlyToStore({
+  store,
+  onFlown,
+}: {
+  store: Store | null;
+  onFlown: () => void;
+}) {
   const map = useMap();
 
   useEffect(() => {
     if (store) {
-      map.flyTo([store.lat, store.lng], 14, { duration: 1.5 });
+      const zoom = 14;
+      const targetLatLng = L.latLng(store.lat, store.lng);
+      const point = map.project(targetLatLng, zoom);
+      const offsetPoint = point.subtract([0, 150]);
+      const offsetLatLng = map.unproject(offsetPoint, zoom);
+      map.flyTo(offsetLatLng, zoom, { duration: 1.5 });
     }
   }, [store, map]);
 
   return null;
 }
 
-function ResetViewButton() {
+function MapController({
+  flyHomeRef,
+}: {
+  flyHomeRef: React.MutableRefObject<(() => void) | null>;
+}) {
   const map = useMap();
-
-  return (
-    <IconButton
-      onClick={() => map.flyTo(center, defaultZoom)}
-      sx={{
-        position: "absolute",
-        top: 72,
-        left: 16,
-        zIndex: 1200,
-        backgroundColor: "white",
-        boxShadow: 2,
-      }}
-    >
-      <HomeIcon />
-    </IconButton>
-  );
+  flyHomeRef.current = () => map.flyTo(center, defaultZoom, { duration: 1.2 });
+  return null;
 }
 
 // ---- Helpers ----
@@ -116,9 +128,8 @@ const formatTime = (mins: number): string => {
   return `${hour12}:${m === 0 ? "00" : m} ${period}`;
 };
 
-// FIX: formatRange now reuses formatTime instead of duplicating the 12-hour logic
 const formatRange = (range: TimeRange): string => {
-  return `${formatTime(toMinutes(range.open))} – ${formatTime(toMinutes(range.close))}`;
+  return `${formatTime(toMinutes(range.open))} - ${formatTime(toMinutes(range.close))}`;
 };
 
 const isStoreOpenInRange = (
@@ -148,11 +159,12 @@ const isOpenNow = (store: Store): boolean => {
   return ranges.some((range) => {
     const open = toMinutes(range.open);
     const close = toMinutes(range.close);
-    // FIX: was `current <= close`, which incorrectly showed stores as open
-    // at their exact closing time. Changed to strict less-than.
     return current >= open && current < close;
   });
 };
+
+const hasExtendedHours = (ranges: TimeRange[]): boolean =>
+  ranges.some((r) => r.note === "independent_bookstore_week_extended");
 
 // ---- Marker component ----
 function StoreMarker({
@@ -183,6 +195,11 @@ function StoreMarker({
     setTimeout(() => setCopied(false), 1200);
   };
 
+  const anyExtended = DAYS.some((d) => {
+    const ranges = store.hours[d];
+    return ranges && hasExtendedHours(ranges);
+  });
+
   return (
     <CircleMarker
       ref={markerRef}
@@ -206,7 +223,7 @@ function StoreMarker({
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: "32px 1fr",
+              gridTemplateColumns: "72px 1fr",
               rowGap: 0.5,
               columnGap: 1,
             }}
@@ -214,6 +231,7 @@ function StoreMarker({
             {DAYS.map((d, i) => {
               const ranges = store.hours[d];
               const isToday = i === todayIndex;
+              const extended = ranges && hasExtendedHours(ranges);
 
               return (
                 <React.Fragment key={d}>
@@ -222,10 +240,9 @@ function StoreMarker({
                     sx={{
                       fontWeight: isToday ? 600 : 400,
                       opacity: isToday ? 1 : 0.7,
-                      textTransform: "capitalize",
                     }}
                   >
-                    {d}
+                    {DAY_LABELS[d]}
                   </Typography>
 
                   <Typography
@@ -238,11 +255,28 @@ function StoreMarker({
                     {ranges && ranges.length > 0
                       ? ranges.map(formatRange).join(", ")
                       : "Closed"}
+                    {extended && (
+                      <Box component="span" sx={{ fontWeight: 700, ml: 0.25 }}>
+                        *
+                      </Box>
+                    )}
                   </Typography>
                 </React.Fragment>
               );
             })}
           </Box>
+
+          {anyExtended && (
+            <>
+              <Divider />
+              <Typography
+                variant="caption"
+                sx={{ opacity: 0.7, fontStyle: "italic" }}
+              >
+                * Extended hours for Indie Bookstore Week
+              </Typography>
+            </>
+          )}
 
           <Divider />
 
@@ -273,13 +307,53 @@ function StoreMarker({
 
 // ---- App ----
 function App() {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
   const [mode, setMode] = useState<"all" | "range" | "openNow">("all");
   const [day, setDay] = useState<string>("sat");
   const [range, setRange] = useState<number[]>([720, 900]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
-  const open = Boolean(anchorEl);
+  const flyHomeRef = useRef<(() => void) | null>(null);
+
+  // Refs used to detect clicks outside the panels
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  // Kill the page scrollbar so the map always fills the viewport
+  useEffect(() => {
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.margin = "0";
+    document.body.style.overflow = "hidden";
+    document.body.style.margin = "0";
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.margin = "";
+      document.body.style.overflow = "";
+      document.body.style.margin = "";
+    };
+  }, []);
+
+  // Close panels on mousedown outside — doesn't block wheel/scroll events
+  // unlike a backdrop div would.
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      const target = e.target as Node;
+      // If the click is inside the toolbar, let the toolbar button handle it
+      if (toolbarRef.current?.contains(target)) return;
+
+      if (filtersOpen && !filtersRef.current?.contains(target)) {
+        setFiltersOpen(false);
+      }
+      if (infoOpen && !infoRef.current?.contains(target)) {
+        setInfoOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleMouseDown);
+    return () => document.removeEventListener("mousedown", handleMouseDown);
+  }, [filtersOpen, infoOpen]);
 
   const getStyle = (store: Store): MarkerStyle => {
     let isMatch = true;
@@ -302,124 +376,245 @@ function App() {
       radius: 6,
       color: "#6b7280",
       fillColor: "#cbd5f5",
-      fillOpacity: 0.5,
+      fillOpacity: 0.72,
       weight: 2,
     };
   };
 
   return (
     <>
-      <IconButton
-        onClick={(e) => setAnchorEl(e.currentTarget)}
+      {/* ---- Toolbar (top-right) ---- */}
+      <Box
+        ref={toolbarRef}
         sx={{
           position: "absolute",
           top: 16,
-          left: 16,
+          right: 16,
           zIndex: 1200,
-          backgroundColor: "white",
-          boxShadow: 2,
+          display: "flex",
+          gap: 1,
         }}
       >
-        <MenuIcon />
-      </IconButton>
+        <Tooltip title="Bookstores">
+          <IconButton
+            onClick={() => {
+              setFiltersOpen((v) => !v);
+              setInfoOpen(false);
+            }}
+            sx={{ backgroundColor: "white", boxShadow: 2 }}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Tooltip>
 
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      >
-        <Paper sx={{ p: 2, width: 280 }}>
-          <Stack spacing={2}>
-            <Autocomplete
-              options={bookstores}
-              getOptionLabel={(option) => option.name}
-              onChange={(_, value) => setSelectedStore(value || null)}
-              renderInput={(params) => (
-                <TextField {...params} label="Find bookstore" size="small" />
-              )}
-            />
+        <Tooltip title="Reset map view">
+          <IconButton
+            onClick={() => flyHomeRef.current?.()}
+            sx={{ backgroundColor: "white", boxShadow: 2 }}
+          >
+            <ZoomOutMapIcon />
+          </IconButton>
+        </Tooltip>
 
-            <ToggleButtonGroup
-              value={mode}
-              exclusive
-              onChange={(_, val) => val && setMode(val)}
-              size="small"
-            >
-              <ToggleButton value="all">All</ToggleButton>
-              <ToggleButton value="range">Time</ToggleButton>
-              <ToggleButton value="openNow">Now</ToggleButton>
-            </ToggleButtonGroup>
+        <Tooltip title="About">
+          <IconButton
+            onClick={() => {
+              setInfoOpen((v) => !v);
+              setFiltersOpen(false);
+            }}
+            sx={{ backgroundColor: "white", boxShadow: 2 }}
+          >
+            <InfoOutlinedIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
 
-            {mode === "range" && (
-              <>
-                <FormControl fullWidth size="small">
-                  <InputLabel>Day</InputLabel>
-                  <Select
-                    value={day}
-                    label="Day"
-                    onChange={(e) => setDay(e.target.value)}
-                  >
-                    <MenuItem value="sun">Sun</MenuItem>
-                    <MenuItem value="mon">Mon</MenuItem>
-                    <MenuItem value="tue">Tue</MenuItem>
-                    <MenuItem value="wed">Wed</MenuItem>
-                    <MenuItem value="thu">Thu</MenuItem>
-                    <MenuItem value="fri">Fri</MenuItem>
-                    <MenuItem value="sat">Sat</MenuItem>
-                  </Select>
-                </FormControl>
+      {/* ---- Filters panel ---- */}
+      {filtersOpen && (
+        <Box
+          ref={filtersRef}
+          sx={{
+            position: "absolute",
+            top: 72,
+            right: 16,
+            zIndex: 1200,
+            width: 280,
+            pointerEvents: "auto",
+          }}
+        >
+          <Paper sx={{ p: 2 }} elevation={3}>
+            <Stack spacing={2}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+                  Find a bookstore
+                </Typography>
+                <IconButton
+                  size="small"
+                  onClick={() => setFiltersOpen(false)}
+                  sx={{ mr: -0.5 }}
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </Box>
 
-                <Box sx={{ px: 1, pt: 3 }}>
-                  <Slider
-                    value={range}
-                    onChange={(_, v) => setRange(v as number[])}
-                    min={MIN}
-                    max={MAX}
-                    step={STEP}
-                    valueLabelDisplay="on"
-                    valueLabelFormat={formatTime}
-                    sx={{
-                      "& .MuiSlider-valueLabel": {
-                        fontSize: 11,
-                        padding: "2px 6px",
-                      },
-                      // Stagger the two thumbs: first label above (default),
-                      // second label below so they never overlap
-                      "& .MuiSlider-thumb:nth-of-type(4) .MuiSlider-valueLabel":
-                        {
-                          top: "auto",
-                          bottom: -32,
-                          "&::before": {
-                            top: "auto",
-                            bottom: "100%",
-                            transform: "translateX(-50%) rotate(180deg)",
-                          },
+              <Autocomplete
+                options={bookstores}
+                getOptionLabel={(option) => option.name}
+                onChange={(_, value) => {
+                  setSelectedStore(value || null);
+                  if (value) setFiltersOpen(false);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Find bookstore" size="small" />
+                )}
+              />
+
+              <ToggleButtonGroup
+                value={mode}
+                exclusive
+                onChange={(_, val) => val && setMode(val)}
+                size="small"
+              >
+                <ToggleButton value="all">All</ToggleButton>
+                <ToggleButton value="range">Time</ToggleButton>
+                <ToggleButton value="openNow">Now</ToggleButton>
+              </ToggleButtonGroup>
+
+              {mode === "range" && (
+                <>
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Day</InputLabel>
+                    <Select
+                      value={day}
+                      label="Day"
+                      onChange={(e) => setDay(e.target.value)}
+                    >
+                      <MenuItem value="sun">Sunday</MenuItem>
+                      <MenuItem value="mon">Monday</MenuItem>
+                      <MenuItem value="tue">Tuesday</MenuItem>
+                      <MenuItem value="wed">Wednesday</MenuItem>
+                      <MenuItem value="thu">Thursday</MenuItem>
+                      <MenuItem value="fri">Friday</MenuItem>
+                      <MenuItem value="sat">Saturday</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <Box sx={{ px: 1, pt: 3 }}>
+                    <Slider
+                      value={range}
+                      onChange={(_, v) => setRange(v as number[])}
+                      min={MIN}
+                      max={MAX}
+                      step={STEP}
+                      valueLabelDisplay="on"
+                      valueLabelFormat={formatTime}
+                      sx={{
+                        "& .MuiSlider-valueLabel": {
+                          fontSize: 11,
+                          padding: "2px 6px",
                         },
-                    }}
-                  />
-                </Box>
-              </>
-            )}
-          </Stack>
-        </Paper>
-      </Popover>
+                      }}
+                    />
+                  </Box>
+                </>
+              )}
+            </Stack>
+          </Paper>
+        </Box>
+      )}
+
+      {/* ---- Info panel ---- */}
+      {infoOpen && (
+        <Box
+          ref={infoRef}
+          sx={{
+            position: "absolute",
+            top: 72,
+            right: 16,
+            zIndex: 1200,
+            width: 260,
+            pointerEvents: "auto",
+          }}
+        >
+          <Paper sx={{ p: 2 }} elevation={3}>
+            <Stack spacing={1}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+                  Independent Bookstore Week
+                </Typography>
+                <IconButton
+                  size="small"
+                  onClick={() => setInfoOpen(false)}
+                  sx={{ mr: -0.5 }}
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </Box>
+
+              <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                Use this app to find participating bookstores.
+              </Typography>
+              <Divider />
+              <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
+                <Box
+                  sx={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: "50%",
+                    backgroundColor: "#86BBBD",
+                    border: "2px solid #4b5563",
+                    flexShrink: 0,
+                  }}
+                />
+                <Typography variant="caption">
+                  Matches current filter
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
+                <Box
+                  sx={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: "50%",
+                    backgroundColor: "#cbd5f5",
+                    border: "2px solid #4b5563",
+                    opacity: 0.72,
+                    flexShrink: 0,
+                  }}
+                />
+                <Typography variant="caption">Does not match</Typography>
+              </Box>
+            </Stack>
+          </Paper>
+        </Box>
+      )}
 
       <MapContainer
         center={center}
         zoom={defaultZoom}
         zoomControl={false}
-        style={{ height: "100vh", width: "100vw" }}
+        style={{ height: "100vh", width: "100%", overflow: "hidden" }}
       >
-        <FlyToStore store={selectedStore} />
-        <ResetViewButton />
+        <FlyToStore store={selectedStore} onFlown={() => {}} />
+        <MapController flyHomeRef={flyHomeRef} />
 
         <TileLayer
           attribution="&copy; OpenStreetMap contributors &copy; CARTO"
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
 
-        {/* FIX: use store.name as key instead of array index */}
         {bookstores.map((store) => (
           <StoreMarker
             key={store.name}
