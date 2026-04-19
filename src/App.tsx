@@ -34,13 +34,13 @@ import {
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
-import CloseIcon from "@mui/icons-material/Close";
 
 // ---- Constants ----
 const MIN = 7 * 60;
 const MAX = 23 * 60;
 const STEP = 30;
 const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
+const DISPLAY_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 
 const DAY_LABELS: { [key: string]: string } = {
   sun: "Sunday",
@@ -106,7 +106,7 @@ function MapController({
 }) {
   const map = useMap();
   flyHomeRef.current = () =>
-    map.flyToBounds(bounds, { padding: [40, 40], duration: 1.2 });
+    map.flyToBounds(bounds, { padding: [10, 10], duration: 1.2 });
   return null;
 }
 
@@ -162,6 +162,9 @@ const isOpenNow = (store: Store): boolean => {
 const hasExtendedHours = (ranges: TimeRange[]): boolean =>
   ranges.some((r) => r.note === "independent_bookstore_week_extended");
 
+const hasApproximateHours = (ranges: TimeRange[]): boolean =>
+  ranges.some((r) => r.note === "approximate_hours");
+
 // ---- Marker component ----
 function StoreMarker({
   store,
@@ -181,7 +184,7 @@ function StoreMarker({
     }
   }, [isSelected]);
 
-  const todayIndex = new Date().getDay();
+  const todayKey = DAYS[new Date().getDay()];
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
@@ -196,6 +199,13 @@ function StoreMarker({
     return ranges && hasExtendedHours(ranges);
   });
 
+  const anyApproximate = DAYS.some((d) => {
+    const ranges = store.hours[d];
+    return ranges && hasApproximateHours(ranges);
+  });
+
+  const hasLocationNote = store.note === "temporary_location";
+
   return (
     <CircleMarker
       ref={markerRef}
@@ -208,10 +218,18 @@ function StoreMarker({
         fillOpacity: style.fillOpacity,
       }}
     >
-      <Popup>
+      <Popup
+        autoPanPaddingTopLeft={L.point(5, 80)}
+        autoPanPaddingBottomRight={L.point(5, 20)}
+      >
         <Stack spacing={1.2} sx={{ minWidth: 200 }}>
           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
             {store.name}
+            {hasLocationNote && (
+              <Box component="span" sx={{ fontWeight: 700, ml: 0.25 }}>
+                *
+              </Box>
+            )}
           </Typography>
 
           <Divider />
@@ -224,10 +242,11 @@ function StoreMarker({
               columnGap: 1,
             }}
           >
-            {DAYS.map((d, i) => {
+            {DISPLAY_DAYS.map((d) => {
               const ranges = store.hours[d];
-              const isToday = i === todayIndex;
+              const isToday = d === todayKey;
               const extended = ranges && hasExtendedHours(ranges);
+              const approximate = ranges && hasApproximateHours(ranges);
 
               return (
                 <React.Fragment key={d}>
@@ -256,21 +275,49 @@ function StoreMarker({
                         *
                       </Box>
                     )}
+                    {approximate && (
+                      <Box component="span" sx={{ fontWeight: 700, ml: 0.25 }}>
+                        *
+                      </Box>
+                    )}
                   </Typography>
                 </React.Fragment>
               );
             })}
           </Box>
 
-          {anyExtended && (
+          {(anyExtended || anyApproximate || hasLocationNote) && (
             <>
               <Divider />
-              <Typography
-                variant="caption"
-                sx={{ opacity: 0.7, fontStyle: "italic" }}
-              >
-                * Extended hours for Indie Bookstore Week
-              </Typography>
+              <Stack spacing={0.5}>
+                {anyExtended && (
+                  <Typography
+                    variant="caption"
+                    sx={{ opacity: 0.7, fontStyle: "italic" }}
+                  >
+                    * Extended hours for Indie Bookstore Week
+                  </Typography>
+                )}
+                {anyApproximate && (
+                  <Typography
+                    variant="caption"
+                    sx={{ opacity: 0.7, fontStyle: "italic" }}
+                  >
+                    * Hours are approximate. This is a mobile store that will be
+                    parked in the lot next to Moon Palace Books on Saturday.
+                  </Typography>
+                )}
+                {hasLocationNote && (
+                  <Typography
+                    variant="caption"
+                    sx={{ opacity: 0.7, fontStyle: "italic" }}
+                  >
+                    * Paperback Exchange will be located at Douglas Flanders &
+                    Associates Art Gallery due to a city water main break that
+                    flooded their store last year.
+                  </Typography>
+                )}
+              </Stack>
             </>
           )}
 
@@ -338,11 +385,11 @@ function App() {
       const target = e.target as Node;
       // If the click is inside the toolbar, let the toolbar button handle it
       if (toolbarRef.current?.contains(target)) return;
-
+      // MUI Autocomplete renders its dropdown in a portal at <body> level —
+      // ignore clicks inside any popper/listbox so selections don't close the panel
+      if ((target as Element).closest?.(".MuiAutocomplete-popper")) return;
+      if ((target as Element).closest?.(".MuiPopover-root")) return;
       if (filtersOpen && !filtersRef.current?.contains(target)) {
-        setFiltersOpen(false);
-      }
-      if (infoOpen && !infoRef.current?.contains(target)) {
         setInfoOpen(false);
       }
     };
@@ -361,10 +408,10 @@ function App() {
     if (isMatch) {
       return {
         radius: 8,
-        color: "#4b5563",
+        color: "#374151",
         fillColor: "#7dd3fc",
         fillOpacity: 1,
-        weight: 3,
+        weight: 2,
       };
     }
 
@@ -372,8 +419,8 @@ function App() {
       radius: 6,
       color: "#4b5563",
       fillColor: "#cbd5f5",
-      fillOpacity: 0.72,
-      weight: 2,
+      fillOpacity: 0.9,
+      weight: 1,
     };
   };
 
@@ -438,26 +485,26 @@ function App() {
             pointerEvents: "auto",
           }}
         >
-          <Paper sx={{ p: 2 }} elevation={3}>
+          <Paper sx={{ p: 2, position: "relative" }} elevation={3}>
+            <Box
+              onClick={() => setFiltersOpen(false)}
+              sx={{
+                position: "absolute",
+                top: 4,
+                right: 8,
+                cursor: "pointer",
+                color: "#aaa",
+                fontSize: 16,
+                lineHeight: 1,
+                "&:hover": { color: "#555" },
+              }}
+            >
+              ×
+            </Box>
             <Stack spacing={2}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                  Find a bookstore
-                </Typography>
-                <IconButton
-                  size="small"
-                  onClick={() => setFiltersOpen(false)}
-                  sx={{ mr: -0.5 }}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </Box>
+              <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+                Find a bookstore
+              </Typography>
 
               <Autocomplete
                 options={bookstores}
@@ -479,7 +526,7 @@ function App() {
               >
                 <ToggleButton value="all">All</ToggleButton>
                 <ToggleButton value="range">Time</ToggleButton>
-                <ToggleButton value="openNow">Now</ToggleButton>
+                <ToggleButton value="openNow">Open Now</ToggleButton>
               </ToggleButtonGroup>
 
               {mode === "range" && (
@@ -538,7 +585,22 @@ function App() {
             pointerEvents: "auto",
           }}
         >
-          <Paper sx={{ p: 2 }} elevation={3}>
+          <Paper sx={{ p: 2, position: "relative" }} elevation={3}>
+            <Box
+              onClick={() => setInfoOpen(false)}
+              sx={{
+                position: "absolute",
+                top: 4,
+                right: 8,
+                cursor: "pointer",
+                color: "#aaa",
+                fontSize: 16,
+                lineHeight: 1,
+                "&:hover": { color: "#555" },
+              }}
+            >
+              ×
+            </Box>
             <Stack spacing={1}>
               <Box
                 sx={{
@@ -552,17 +614,24 @@ function App() {
                     Twin Cities Independent Bookstore Passport
                   </Typography>
                 </Box>
-                <IconButton
-                  size="small"
-                  onClick={() => setInfoOpen(false)}
-                  sx={{ mr: -0.5 }}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
               </Box>
 
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                Use this app to find participating bookstores.
+                In celebration of Independent Bookstore Day,{" "}
+                <a
+                  href="https://raintaxi.com/twin-cities-independent-bookstore-passport-2026/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Rain Taxi
+                </a>{" "}
+                created passports that can be stamped at participating
+                bookstores. The event runs from Wednesday, April 22nd through
+                Sunday, April 26th.
+              </Typography>
+              <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
+                The purpose of this map is to help you find which bookstores
+                will be open while you're out exploring.
               </Typography>
               {/* <Divider />
               <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>

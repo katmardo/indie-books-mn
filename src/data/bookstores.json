@@ -45,7 +45,7 @@
   },
 
   {
-    "name": "Babycake’s Book Stack",
+    "name": "Babycake's Book Stack",
     "lat": 44.94747509303155,
     "lng": -93.23398976504994,
     "hours": {
@@ -54,7 +54,9 @@
       "wed": [],
       "thu": [],
       "fri": [],
-      "sat": [{ "open": "10:00", "close": "16:00" }],
+      "sat": [
+        { "open": "10:00", "close": "16:00", "note": "approximate_hours" }
+      ],
       "sun": []
     }
   },
@@ -405,6 +407,7 @@
     "name": "Paperback Exchange",
     "lat": 44.91172449842424,
     "lng": -93.32888533561928,
+    "note": "temporary_location",
     "hours": {
       "mon": [],
       "tue": [],
