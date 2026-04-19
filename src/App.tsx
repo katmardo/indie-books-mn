@@ -364,6 +364,9 @@ function App() {
   const filtersRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
 
+  // Ref for focusing the autocomplete input when the filters panel opens
+  const autocompleteInputRef = useRef<HTMLInputElement>(null);
+
   // Kill the page scrollbar so the map always fills the viewport
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
@@ -378,6 +381,13 @@ function App() {
     };
   }, []);
 
+  // Move focus into the filters panel when it opens
+  useEffect(() => {
+    if (filtersOpen) {
+      setTimeout(() => autocompleteInputRef.current?.focus(), 0);
+    }
+  }, [filtersOpen]);
+
   // Close panels on mousedown outside — doesn't block wheel/scroll events
   // unlike a backdrop div would.
   useEffect(() => {
@@ -390,6 +400,9 @@ function App() {
       if ((target as Element).closest?.(".MuiAutocomplete-popper")) return;
       if ((target as Element).closest?.(".MuiPopover-root")) return;
       if (filtersOpen && !filtersRef.current?.contains(target)) {
+        setFiltersOpen(false);
+      }
+      if (infoOpen && !infoRef.current?.contains(target)) {
         setInfoOpen(false);
       }
     };
@@ -486,21 +499,6 @@ function App() {
           }}
         >
           <Paper sx={{ p: 2, position: "relative" }} elevation={3}>
-            <Box
-              onClick={() => setFiltersOpen(false)}
-              sx={{
-                position: "absolute",
-                top: 4,
-                right: 8,
-                cursor: "pointer",
-                color: "#aaa",
-                fontSize: 16,
-                lineHeight: 1,
-                "&:hover": { color: "#555" },
-              }}
-            >
-              ×
-            </Box>
             <Stack spacing={2}>
               <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
                 Find a bookstore
@@ -514,7 +512,12 @@ function App() {
                   if (value) setFiltersOpen(false);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Find bookstore" size="small" />
+                  <TextField
+                    {...params}
+                    inputRef={autocompleteInputRef}
+                    label="Find bookstore"
+                    size="small"
+                  />
                 )}
               />
 
@@ -568,6 +571,26 @@ function App() {
                 </>
               )}
             </Stack>
+
+            <Box
+              onClick={() => setFiltersOpen(false)}
+              onKeyDown={(e) => e.key === "Enter" && setFiltersOpen(false)}
+              tabIndex={0}
+              role="button"
+              aria-label="Close"
+              sx={{
+                position: "absolute",
+                top: 4,
+                right: 8,
+                cursor: "pointer",
+                color: "#aaa",
+                fontSize: 16,
+                lineHeight: 1,
+                "&:hover": { color: "#555" },
+              }}
+            >
+              ×
+            </Box>
           </Paper>
         </Box>
       )}
@@ -586,21 +609,6 @@ function App() {
           }}
         >
           <Paper sx={{ p: 2, position: "relative" }} elevation={3}>
-            <Box
-              onClick={() => setInfoOpen(false)}
-              sx={{
-                position: "absolute",
-                top: 4,
-                right: 8,
-                cursor: "pointer",
-                color: "#aaa",
-                fontSize: 16,
-                lineHeight: 1,
-                "&:hover": { color: "#555" },
-              }}
-            >
-              ×
-            </Box>
             <Stack spacing={1}>
               <Box
                 sx={{
@@ -664,6 +672,26 @@ function App() {
                 <Typography variant="caption">Does not match</Typography>
               </Box> */}
             </Stack>
+
+            <Box
+              onClick={() => setInfoOpen(false)}
+              onKeyDown={(e) => e.key === "Enter" && setInfoOpen(false)}
+              tabIndex={0}
+              role="button"
+              aria-label="Close"
+              sx={{
+                position: "absolute",
+                top: 4,
+                right: 8,
+                cursor: "pointer",
+                color: "#aaa",
+                fontSize: 16,
+                lineHeight: 1,
+                "&:hover": { color: "#555" },
+              }}
+            >
+              ×
+            </Box>
           </Paper>
         </Box>
       )}
