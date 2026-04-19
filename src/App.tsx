@@ -77,8 +77,9 @@ type MarkerStyle = {
 
 const bookstores = bookstoresData as Store[];
 
-const center: [number, number] = [44.95, -93.27];
-const defaultZoom = 11;
+const bounds = L.latLngBounds(
+  bookstores.map((s) => [s.lat, s.lng] as [number, number]),
+);
 
 // ---- Map helpers ----
 function FlyToStore({ store }: { store: Store | null; onFlown: () => void }) {
@@ -104,7 +105,8 @@ function MapController({
   flyHomeRef: React.MutableRefObject<(() => void) | null>;
 }) {
   const map = useMap();
-  flyHomeRef.current = () => map.flyTo(center, defaultZoom, { duration: 1.2 });
+  flyHomeRef.current = () =>
+    map.flyToBounds(bounds, { padding: [40, 40], duration: 1.2 });
   return null;
 }
 
@@ -596,8 +598,8 @@ function App() {
       )}
 
       <MapContainer
-        center={center}
-        zoom={defaultZoom}
+        bounds={bounds}
+        boundsOptions={{ padding: [10, 10] }}
         zoomControl={false}
         style={{ height: "100vh", width: "100%", overflow: "hidden" }}
       >
