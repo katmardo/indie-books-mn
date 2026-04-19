@@ -354,7 +354,7 @@ function App() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [mode, setMode] = useState<"all" | "range" | "openNow">("all");
   const [day, setDay] = useState<string>("sat");
-  const [range, setRange] = useState<number[]>([720, 900]);
+  const [range, setRange] = useState<number[]>([540, 1020]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
   const flyHomeRef = useRef<(() => void) | null>(null);
