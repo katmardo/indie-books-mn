@@ -81,13 +81,7 @@ const center: [number, number] = [44.95, -93.27];
 const defaultZoom = 11;
 
 // ---- Map helpers ----
-function FlyToStore({
-  store,
-  onFlown,
-}: {
-  store: Store | null;
-  onFlown: () => void;
-}) {
+function FlyToStore({ store }: { store: Store | null; onFlown: () => void }) {
   const map = useMap();
 
   useEffect(() => {
@@ -374,7 +368,7 @@ function App() {
 
     return {
       radius: 6,
-      color: "#6b7280",
+      color: "#4b5563",
       fillColor: "#cbd5f5",
       fillOpacity: 0.72,
       weight: 2,
