@@ -54,9 +54,7 @@
       "wed": [],
       "thu": [],
       "fri": [],
-      "sat": [
-        { "open": "10:00", "close": "16:00", "note": "approximate_hours" }
-      ],
+      "sat": [{ "open": "11:00", "close": "18:00" }],
       "sun": []
     }
   },
