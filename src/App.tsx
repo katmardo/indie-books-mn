@@ -407,7 +407,7 @@ function App() {
 
     if (isMatch) {
       return {
-        radius: 8,
+        radius: 10,
         color: "#374151",
         fillColor: "#7dd3fc",
         fillOpacity: 1,
@@ -416,7 +416,7 @@ function App() {
     }
 
     return {
-      radius: 6,
+      radius: 8,
       color: "#4b5563",
       fillColor: "#cbd5f5",
       fillOpacity: 0.9,
