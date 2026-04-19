@@ -29,11 +29,14 @@ import {
   Button,
   Divider,
   Tooltip,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
 // ---- Constants ----
 const MIN = 7 * 60;
@@ -352,6 +355,7 @@ function StoreMarker({
 function App() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const [mode, setMode] = useState<"all" | "range" | "openNow">("all");
   const [day, setDay] = useState<string>("sat");
   const [range, setRange] = useState<number[]>([540, 1020]);
@@ -641,36 +645,6 @@ function App() {
                 The purpose of this map is to help you find which bookstores
                 will be open while you're out exploring.
               </Typography>
-              {/* <Divider />
-              <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
-                <Box
-                  sx={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    backgroundColor: "#86BBBD",
-                    border: "2px solid #4b5563",
-                    flexShrink: 0,
-                  }}
-                />
-                <Typography variant="caption">
-                  Matches current filter
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
-                <Box
-                  sx={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    backgroundColor: "#cbd5f5",
-                    border: "2px solid #4b5563",
-                    opacity: 0.72,
-                    flexShrink: 0,
-                  }}
-                /> 
-                <Typography variant="caption">Does not match</Typography>
-              </Box> */}
             </Stack>
 
             <Box
@@ -695,6 +669,54 @@ function App() {
           </Paper>
         </Box>
       )}
+
+      {/* ---- Contact button (bottom-left) ---- */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 16,
+          left: 16,
+          zIndex: 1200,
+        }}
+      >
+        <Tooltip title="Contact">
+          <IconButton
+            onClick={() => setContactOpen(true)}
+            sx={{ backgroundColor: "white", boxShadow: 2 }}
+          >
+            <EmailOutlinedIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
+      </Box>
+
+      {/* ---- Contact modal ---- */}
+      <Dialog open={contactOpen} onClose={() => setContactOpen(false)}>
+        <DialogContent sx={{ position: "relative", pr: 4 }}>
+          <Box
+            onClick={() => setContactOpen(false)}
+            onKeyDown={(e) => e.key === "Enter" && setContactOpen(false)}
+            tabIndex={0}
+            role="button"
+            aria-label="Close"
+            sx={{
+              position: "absolute",
+              top: 4,
+              right: 8,
+              cursor: "pointer",
+              color: "#aaa",
+              fontSize: 16,
+              lineHeight: 1,
+              "&:hover": { color: "#555" },
+            }}
+          >
+            ×
+          </Box>
+          <Typography variant="body2">
+            Found a bug? Have a suggested edit? Email{" "}
+            <a href="mailto:katmardo@gmail.com">katmardo@gmail.com</a>
+          </Typography>
+        </DialogContent>
+      </Dialog>
 
       <MapContainer
         bounds={bounds}
