@@ -543,13 +543,15 @@ function App() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                   justifyContent: "space-between",
                 }}
               >
-                <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                  Independent Bookstore Week
-                </Typography>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+                    Twin Cities Independent Bookstore Passport
+                  </Typography>
+                </Box>
                 <IconButton
                   size="small"
                   onClick={() => setInfoOpen(false)}
@@ -562,7 +564,7 @@ function App() {
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 Use this app to find participating bookstores.
               </Typography>
-              <Divider />
+              {/* <Divider />
               <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                 <Box
                   sx={{
@@ -589,9 +591,9 @@ function App() {
                     opacity: 0.72,
                     flexShrink: 0,
                   }}
-                />
+                /> 
                 <Typography variant="caption">Does not match</Typography>
-              </Box>
+              </Box> */}
             </Stack>
           </Paper>
         </Box>
