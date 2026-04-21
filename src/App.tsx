@@ -433,11 +433,11 @@ function App() {
     }
 
     return {
-      radius: 8,
+      radius: 9,
       color: "#4b5563",
       fillColor: "#cbd5f5",
       fillOpacity: 0.9,
-      weight: 1,
+      weight: 1.5,
     };
   };
 
@@ -455,13 +455,19 @@ function App() {
           gap: 1,
         }}
       >
-        <Tooltip title="Bookstores">
+        <Tooltip title="Search">
           <IconButton
             onClick={() => {
               setFiltersOpen((v) => !v);
               setInfoOpen(false);
             }}
-            sx={{ backgroundColor: "white", boxShadow: 2 }}
+            sx={{
+              backgroundColor: "#ffc71eb8",
+              boxShadow: 3,
+              "&:hover": {
+                backgroundColor: "#ffffffb0",
+              },
+            }}
           >
             <SearchIcon />
           </IconButton>
@@ -470,7 +476,13 @@ function App() {
         <Tooltip title="Reset map view">
           <IconButton
             onClick={() => flyHomeRef.current?.()}
-            sx={{ backgroundColor: "white", boxShadow: 2 }}
+            sx={{
+              backgroundColor: "#ffc71eb8",
+              boxShadow: 3,
+              "&:hover": {
+                backgroundColor: "#ffffffb0",
+              },
+            }}
           >
             <ZoomOutMapIcon />
           </IconButton>
@@ -482,7 +494,13 @@ function App() {
               setInfoOpen((v) => !v);
               setFiltersOpen(false);
             }}
-            sx={{ backgroundColor: "white", boxShadow: 2 }}
+            sx={{
+              backgroundColor: "#ffc71eb8",
+              boxShadow: 3,
+              "&:hover": {
+                backgroundColor: "#ffffffb0",
+              },
+            }}
           >
             <InfoOutlinedIcon />
           </IconButton>
