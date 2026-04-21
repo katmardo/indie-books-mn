@@ -462,10 +462,10 @@ function App() {
               setInfoOpen(false);
             }}
             sx={{
-              backgroundColor: "#fff6da",
-              boxShadow: 3,
+              backgroundColor: "#ffffff",
+              boxShadow: 5,
               "&:hover": {
-                backgroundColor: "#ffffffb0",
+                backgroundColor: "#e8e8e8b0",
               },
             }}
           >
@@ -477,10 +477,10 @@ function App() {
           <IconButton
             onClick={() => flyHomeRef.current?.()}
             sx={{
-              backgroundColor: "#fff6da",
-              boxShadow: 3,
+              backgroundColor: "#ffffff",
+              boxShadow: 5,
               "&:hover": {
-                backgroundColor: "#ffffffb0",
+                backgroundColor: "#e8e8e8b0",
               },
             }}
           >
@@ -495,10 +495,10 @@ function App() {
               setFiltersOpen(false);
             }}
             sx={{
-              backgroundColor: "#fff6da",
-              boxShadow: 3,
+              backgroundColor: "#ffffff",
+              boxShadow: 5,
               "&:hover": {
-                backgroundColor: "#ffffffb0",
+                backgroundColor: "#e8e8e8b0",
               },
             }}
           >
