@@ -353,7 +353,7 @@ function StoreMarker({
 
 // ---- App ----
 function App() {
-  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(true);
   const [infoOpen, setInfoOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [mode, setMode] = useState<"all" | "range" | "openNow">("all");
@@ -520,12 +520,8 @@ function App() {
             pointerEvents: "auto",
           }}
         >
-          <Paper sx={{ p: 2, position: "relative" }} elevation={3}>
+          <Paper sx={{ p: 2.5, position: "relative" }} elevation={3}>
             <Stack spacing={2}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                Find a bookstore
-              </Typography>
-
               <Autocomplete
                 options={bookstores}
                 getOptionLabel={(option) => option.name}
@@ -537,7 +533,7 @@ function App() {
                   <TextField
                     {...params}
                     inputRef={autocompleteInputRef}
-                    label="Find bookstore"
+                    label="Bookstores"
                     size="small"
                   />
                 )}
@@ -606,7 +602,7 @@ function App() {
                 right: 8,
                 cursor: "pointer",
                 color: "#aaa",
-                fontSize: 16,
+                fontSize: 18,
                 lineHeight: 1,
                 "&:hover": { color: "#555" },
               }}
@@ -660,8 +656,8 @@ function App() {
                 Sunday, April 26th.
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
-                The purpose of this map is to help you find which bookstores
-                will be open while you're out exploring.
+                Use this map to find which bookstores will be open while you're
+                out exploring.
               </Typography>
             </Stack>
 
@@ -677,7 +673,7 @@ function App() {
                 right: 8,
                 cursor: "pointer",
                 color: "#aaa",
-                fontSize: 16,
+                fontSize: 18,
                 lineHeight: 1,
                 "&:hover": { color: "#555" },
               }}
