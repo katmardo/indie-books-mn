@@ -34,12 +34,12 @@
     "lat": 45.198091045391344,
     "lng": -93.38867004472957,
     "hours": {
-      "mon": [{ "open": "7:00", "close": "17:00" }],
-      "tue": [{ "open": "7:00", "close": "17:00" }],
-      "wed": [{ "open": "7:00", "close": "17:00" }],
-      "thu": [{ "open": "7:00", "close": "17:00" }],
-      "fri": [{ "open": "7:00", "close": "17:00" }],
-      "sat": [{ "open": "8:00", "close": "17:00" }],
+      "mon": [{ "open": "9:00", "close": "17:00" }],
+      "tue": [{ "open": "9:00", "close": "17:00" }],
+      "wed": [{ "open": "9:00", "close": "17:00" }],
+      "thu": [{ "open": "9:00", "close": "17:00" }],
+      "fri": [{ "open": "9:00", "close": "17:00" }],
+      "sat": [{ "open": "9:00", "close": "17:00" }],
       "sun": [{ "open": "9:00", "close": "17:00" }]
     }
   },
@@ -629,7 +629,7 @@
       ],
       "sun": [
         {
-          "open": "11:00",
+          "open": "10:00",
           "close": "17:00",
           "note": "independent_bookstore_week_extended"
         }
